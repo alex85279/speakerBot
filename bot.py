@@ -11,6 +11,8 @@ async def on_ready():
 async def on_member_join(member):
     print(F'{member}join!')
 
-
+@bot.event
+async def one_member_leave(member):
+    print(F'{member}leave!')
 
 bot.run('')
