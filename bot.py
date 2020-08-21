@@ -7,4 +7,12 @@ bot = commands.Bot(command_prefix='fk')
 async def on_ready():
     print(">>Bot is online<<")
 
-bot.run('NzQ1OTEzNDE2MzU0MzY1NDYw.Xz4sAA.3oW83nkSQeMW8UyQzu-I7HcyWT4')
+@bot.event
+async def on_member_join(member):
+    print(F'{member}join!')
+
+@bot.event
+async def one_member_leave(member):
+    print(F'{member}leave!')
+
+bot.run('')
