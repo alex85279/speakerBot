@@ -8,9 +8,8 @@ from bs4 import BeautifulSoup as soup
 from pathlib import Path
 from selenium import webdriver
 from core.classes import Cog_Extension
+import os
 
-with open('C:\\Users\\User\\Documents\\GitHub\\speakerBot\\setting.json', 'r', encoding='utf8') as setting:
-    jdata = json.load(setting)
 class LOL_HERO(Cog_Extension):
     def __init__(self, bot):
         self.bot = bot
@@ -21,7 +20,7 @@ class LOL_HERO(Cog_Extension):
         # my_header = "Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:10.0) Gecko/20100101 Firefox/10.0 "
 
         ''' 檢測擺圖片的資料夾是否存在 '''
-        pic_path = jdata['hero_pic_path']
+        pic_path = os.getenv('HERO_PIC_PATH')
         if Path(pic_path).is_dir():
             pass
         else:
