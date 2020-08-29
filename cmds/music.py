@@ -6,6 +6,8 @@ import json
 import nacl
 from gtts import gTTS
 from async_timeout import timeout
+import os
+from pathlib import Path
 
 class Music(Cog_Extension):
     @commands.command()
@@ -42,11 +44,18 @@ class Music(Cog_Extension):
 
     @commands.command()
     async def 說(self, ctx, args):
+        audio_path = os.getenv('AUDIO_PATH')
+        if Path(audio_path).is_dir():
+            pass
+        else:
+            Path(audio_path).mkdir()
         output = gTTS(text=args, lang='zh-tw', slow=False)
-        output.save('./audio/temp.mp3')
+        output.save(audio_path+'\\temp.mp3')
         # source = discord.PCMVolumeTransformer()
-        ctx.voice_client.play(discord.FFmpegPCMAudio(executable='D:/ffmpeg/bin/ffmpeg.exe', source='./audio/temp.mp3'))
-        os.remove('./audio/temp.mp3')
+        ctx.voice_client.play(discord.FFmpegPCMAudio(executable=os.getenv('FFMPEG_FILE'), source=audio_path+'\\temp.mp3'))
     
+    def remove_file(self, path):
+        os.remove(path)
+
 def setup(bot):
     bot.add_cog(Music(bot))
