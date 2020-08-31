@@ -8,6 +8,7 @@ from gtts import gTTS
 from async_timeout import timeout
 import os
 from pathlib import Path
+import langid
 
 class Music(Cog_Extension):
     @commands.command()
@@ -49,7 +50,10 @@ class Music(Cog_Extension):
             pass
         else:
             Path(audio_path).mkdir()
-        output = gTTS(text=args, lang='zh-tw', slow=False)
+        lang = langid.classify(args)[0]
+        if lang == 'zh':
+            lang += '-tw'
+        output = gTTS(text=args, lang=lang, slow=False)
         output.save(audio_path+'\\temp.mp3')
         # source = discord.PCMVolumeTransformer()
         ctx.voice_client.play(discord.FFmpegPCMAudio(executable=os.getenv('FFMPEG_FILE'), source=audio_path+'\\temp.mp3'))
