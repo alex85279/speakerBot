@@ -37,6 +37,7 @@ wrapt = "==1.12.1"
 yarl = "==1.5.1"
 gtts = "*"
 langid = "*"
+gtts-token = "*"
 
 [requires]
 python_version = "3.7"

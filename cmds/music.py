@@ -44,7 +44,7 @@ class Music(Cog_Extension):
         await ctx.send("掰")
 
     @commands.command()
-    async def 說(self, ctx, args):
+    async def t(self, ctx, args):
         audio_path = os.getenv('AUDIO_PATH')
         if Path(audio_path).is_dir():
             pass
